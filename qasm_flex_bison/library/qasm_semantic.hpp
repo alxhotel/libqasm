@@ -9,9 +9,16 @@
 extern int yyparse();
 extern int yylex();
 extern FILE* yyin;
+extern char* yytext;
 extern struct YY_BUFFER_STATE* yy_scan_string(const char*);
 extern int yylex_destroy(void);
+
+// Parser state
+extern compiler::Bits bits_identified;
+extern compiler::NumericalIdentifiers buffer_indices;
+extern compiler::SubCircuits subcircuits_object;
 extern compiler::QasmRepresentation qasm_representation;
+extern std::string buffer_string;
 
 namespace compiler
 {
@@ -21,6 +28,11 @@ namespace compiler
             QasmSemanticChecker(const char* qasm_str)
             {
                 // Clean state
+                bits_identified.clear();
+                buffer_indices.clear();
+                subcircuits_object.clear();
+                qasm_representation.clear();
+
                 yylex_destroy();
 
                 // set lex to read from it instead of defaulting to STDIN:
@@ -29,7 +41,7 @@ namespace compiler
                 // parse the input
                 if (yyparse())
                     throw std::runtime_error(std::string("Could not parse qasm file!\n"));
- 
+				
                 maxNumQubit_ = qasm_representation.numQubits();
                 qasm_ = qasm_representation;
                 parse_result_ = doChecks();
@@ -38,6 +50,11 @@ namespace compiler
             QasmSemanticChecker(FILE *qasm_file)
             {
                 // Clean state
+                bits_identified.clear();
+                buffer_indices.clear();
+                subcircuits_object.clear();
+                qasm_representation.clear();
+
                 yylex_destroy();
 
                 // set lex to read from it instead of defaulting to STDIN:

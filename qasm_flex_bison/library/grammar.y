@@ -55,19 +55,19 @@
 %%
 
 //# Describe the general structure of a qasm file
-qasm-file : qasm_version NEWLINE qubit-register body 
+qasm-file : qasm_version NEWLINE qubit-register body
             {
               qasm_representation.getSubCircuits() = subcircuits_object;
             }
-          | qasm_version NEWLINE comment qubit-register body 
+          | qasm_version NEWLINE comment qubit-register body
             {
               qasm_representation.getSubCircuits() = subcircuits_object;
             }
-          | qasm_version NEWLINE qubit-register 
+          | qasm_version NEWLINE qubit-register
             {
               qasm_representation.getSubCircuits() = subcircuits_object;
             }
-          | qasm_version NEWLINE comment qubit-register 
+          | qasm_version NEWLINE comment qubit-register
             {
               qasm_representation.getSubCircuits() = subcircuits_object;
             }

@@ -114,6 +114,11 @@ namespace compiler
                 std::cout << "Selected Bits - ";
                 getSelectedBits().printMembers();
             }
+			
+			void clear()
+			{
+				selected_bits_.clear();
+			}
 
         protected:
             NumericalIdentifiers selected_bits_;
@@ -563,7 +568,7 @@ namespace compiler
             SubCircuits()
             {
                 SubCircuit default_circuit("default", 0, 1);
-                subcircuits_.push_back ( default_circuit );
+                subcircuits_.push_back(default_circuit);
             }
 
             void addSubCircuit(SubCircuit subcircuit)
@@ -585,6 +590,13 @@ namespace compiler
             {
                 return subcircuits_;
             }
+			
+			void clear()
+			{
+				subcircuits_.clear();
+				SubCircuit default_circuit("default", 0, 1);
+                subcircuits_.push_back(default_circuit);
+			}
 
         protected:
             std::vector<SubCircuit> subcircuits_;
@@ -683,6 +695,15 @@ namespace compiler
                     std::cout << i << std::endl;
                 }
             }
+			
+			void clear()
+			//This is to clear the attributes of the object
+			{
+				subcircuits_.clear();
+				qubit_register_ = 0;
+				version_number_ = 0;
+				mappings_.clear();
+			}
 
         protected:
             SubCircuits subcircuits_;
