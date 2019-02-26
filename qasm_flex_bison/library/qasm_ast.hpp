@@ -234,25 +234,25 @@ namespace compiler
                         case 1: return toffoli_qubit_pairs_.first; break;
                         case 2: return toffoli_qubit_pairs_.second.first; break;
                         case 3: return toffoli_qubit_pairs_.second.second; break;
-                        default: throw std::runtime_error( std::string("Accessing qubit pair ") 
-                                              + std::to_string(qubit_pair_index) 
+                        default: throw std::runtime_error( std::string("Accessing qubit pair ")
+                                              + std::to_string(qubit_pair_index)
                                               + std::string(" on operation ") + type_ ); return qubits_;
                     }
                 }
-                else if (type_ == "cnot" || type_ == "cz" || type_ == "swap" || type_ == "cr" || type_ == "crk")
+                else if (type_ == "cnot" || type_ == "cz" || type_ == "swap" || type_ == "sqswap" || type_ == "cr" || type_ == "crk")
                 {
                     switch(qubit_pair_index){
                         case 1: return two_qubit_pairs_.first; break;
                         case 2: return two_qubit_pairs_.second; break;
-                        default: throw std::runtime_error( std::string("Accessing qubit pair ") 
-                                              + std::to_string(qubit_pair_index) 
+                        default: throw std::runtime_error( std::string("Accessing qubit pair ")
+                                              + std::to_string(qubit_pair_index)
                                               + std::string(" on operation ") + type_ ); return qubits_;
                     }
                 }
                 else
                 {
-                    throw std::runtime_error( std::string("Accessing qubit pair ") 
-                                              + std::to_string(qubit_pair_index) 
+                    throw std::runtime_error( std::string("Accessing qubit pair ")
+                                              + std::to_string(qubit_pair_index)
                                               + std::string(" on operation ") + type_ );
                     return qubits_;
                 }
@@ -276,7 +276,6 @@ namespace compiler
 
             const std::pair< Qubits, std::pair<Qubits,Qubits> >& getToffoliQubitPairs() const
             {
-                
                 return toffoli_qubit_pairs_;
             }
 
@@ -338,7 +337,7 @@ namespace compiler
                     measureParityProperties.first.second.printMembers();
                     std::cout << "With axis " << measureParityProperties.second.second << std::endl;
                 }
-                else if (type_ == "cnot" || type_ == "cz" || type_ == "swap")
+                else if (type_ == "cnot" || type_ == "cz" || type_ == "swap" || type_ == "sqswap")
                 {
                     std::cout << std::endl;
                     std::cout << "Qubit Pair 1: ";
