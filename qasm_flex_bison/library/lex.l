@@ -23,7 +23,7 @@ nonneginteger      [0-9]+
 integer            (\-)?{nonneginteger}
 float              (\-)?({nonneginteger}\.{nonneginteger}*)[eE]?((\-)?{nonneginteger})?
 axis               ([xX]|[yY]|[zZ])
-single_qubits      ((?i:i)|(?i:h)|(?i:x90)|(?i:y90)|(?i:mx90)|(?i:my90)|(?i:s)|(?i:sdag)|(?i:t)|(?i:tdag)|(?i:u)|(?i:shuttle_left)|(?i:shuttle_right)|(?i:shuttle_up)|(?i:shuttle_down)|(?i:z_shuttle_left)|(?i:z_shuttle_right))
+single_qubits      ((?i:i)|(?i:h)|(?i:x90)|(?i:y90)|(?i:mx90)|(?i:my90)|(?i:s)|(?i:sdag)|(?i:t)|(?i:tdag)|(?i:u)|(?i:shuttle_left)|(?i:shuttle_right)|(?i:shuttle_up)|(?i:shuttle_down)|(?i:z_shuttle_left)|(?i:z_shuttle_right)|(?i:s_shuttle_left)|(?i:s_shuttle_right)|(?i:t_shuttle_left)|(?i:t_shuttle_right))
 two_qubit_gates    ((?i:cnot)|(?i:cz)|(?i:swap)|(?i:sqswap))
 toffoli            (?i:toffoli)
 rotations          ([rR]){axis}
