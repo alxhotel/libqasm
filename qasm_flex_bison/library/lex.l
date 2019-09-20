@@ -23,8 +23,8 @@ nonneginteger      [0-9]+
 integer            (\-)?{nonneginteger}
 float              (\-)?({nonneginteger}\.{nonneginteger}*)[eE]?((\-)?{nonneginteger})?
 axis               ([xX]|[yY]|[zZ])
-single_qubits      ((?i:i)|(?i:h)|(?i:x90)|(?i:y90)|(?i:mx90)|(?i:my90)|(?i:s)|(?i:sdag)|(?i:t)|(?i:tdag)|(?i:u))
-two_qubit_gates    ((?i:cnot)|(?i:cz)|(?i:swap))
+single_qubits      ((?i:i)|(?i:h)|(?i:x90)|(?i:y90)|(?i:mx90)|(?i:my90)|(?i:s)|(?i:sdag)|(?i:t)|(?i:tdag)|(?i:u)|(?i:shuttle_left)|(?i:shuttle_right)|(?i:shuttle_up)|(?i:shuttle_down)|(?i:z_shuttle_left)|(?i:z_shuttle_right)|(?i:zdag_shuttle_left)|(?i:zdag_shuttle_right)|(?i:s_shuttle_left)|(?i:sdag_shuttle_right)|(?i:z_shuttle_left)|(?i:sdag_shuttle_right)|(?i:t_shuttle_left)|(?i:t_shuttle_right)|(?i:tdag_shuttle_left)|(?i:tdag_shuttle_right))
+two_qubit_gates    ((?i:cnot)|(?i:cz)|(?i:swap)|(?i:sqswap))
 toffoli            (?i:toffoli)
 rotations          ([rR]){axis}
 cr                 (?i:cr)
@@ -45,7 +45,7 @@ display            ((?i:display)|(?i:display_binary))
 qubithead          [qQ]
 bithead            [bB]
 prep               (?i:prep)(_{axis})?
-measurehead        (?i:measure)
+measurehead        ((?i:measure)|(?i:measure_left_up)|(?i:measure_left_down)|(?i:measure_right_up)|(?i:measure_right_down))
 measure            {measurehead}(_{axis})?
 measureall         {measurehead}(_(?i:all))
 measureparity      {measurehead}(_(?i:parity))
