@@ -17,7 +17,7 @@ if not os.path.exists(buildDir):
 os.chdir(buildDir)
 
 if platform == "linux" or platform == "linux2":
-    print('Detected Linux OS, installing libQasm ... ')
+    print('Detected Linux OS, installing libQasm...')
     cmd = 'cmake ../library/'
     proc = subprocess.Popen(cmd, shell=True)
     proc.communicate()
@@ -29,7 +29,18 @@ if platform == "linux" or platform == "linux2":
     proc.communicate()
     clibname = "_libQasm.so"
 else:
-    print('Unknown/Unsupported OS !!!')
+    print('Detected Windows, installing libQasm...')
+    cmd = 'cmake -G "MinGW Makefiles" ../library/'
+    proc = subprocess.Popen(cmd, shell=True)
+    proc.communicate()
+    cmd = 'mingw32-make'
+    proc = subprocess.Popen(cmd, shell=True)
+    proc.communicate()
+    cmd = 'mingw32-make test'
+    proc = subprocess.Popen(cmd, shell=True)
+    proc.communicate()
+    clibname = '_libQasm.pyd'
+    
 
 genclib = os.path.join(rootDir, "cbuild", clibname)
 print('genclib {}'.format(genclib) )
@@ -53,6 +64,17 @@ copyfile(os.path.join(clibDir, "libQasm.py"),
 copyfile(os.path.join(clibDir, "libQasm.py"),
          os.path.join(rootDir, "libQasm", "libQasm.py"))
 
+liblexgram = ''
+if platform == 'win32':
+    print('copying', os.path.join(clibDir, 'liblexgram.dll'), 'to', os.path.join(rootDir, 'libQasm', 'liblexgram.dll'))
+    copyfile(os.path.join(clibDir, 'liblexgram.dll'),
+             os.path.join(rootDir, 'libQasm', 'liblexgram.dll'))
+    liblexgram = os.path.join(rootDir, 'libQasm', 'liblexgram.dll')
+else:
+    print('Not on Windows, skipping liblexgram.dll')
+
+print('liblexgram', liblexgram)
+
 os.chdir(rootDir)
 
 def read(fname):
@@ -67,5 +89,5 @@ setup(name='libQasm',
       url="www.github.com",
       packages=['libQasm'],
       include_package_data=True,
-      package_data={'libQasm': [clib]},
+      package_data={'libQasm': [clib, liblexgram]},
       zip_safe=False)
